@@ -84,8 +84,7 @@ void * initializeKernelBinary(){
 	init_processes();
 	init_sched();
 	init_graphics();
-	load_idt();
-	to_userland();
+	
 
 	return getStackBase();
 }
@@ -93,6 +92,11 @@ void * initializeKernelBinary(){
 
 int main()
 {
+	load_idt();
+	to_userland();
+	while(1){
+		
+	}	
 	
 	return 0;
 }
