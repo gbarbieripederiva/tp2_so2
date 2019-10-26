@@ -48,8 +48,7 @@ void to_userland(){
 	}
 
 void * initializeKernelBinary(){
-	char buffer[10];
-	(cpuVendor(buffer));
+
 	void * moduleAddresses[] = {
 		sampleCodeModuleAddress,
 		sampleDataModuleAddress
@@ -58,32 +57,12 @@ void * initializeKernelBinary(){
 	clearBSS(&bss, &endOfKernel - &bss);
 
 
-	ncPrint("  text: 0x");
-	ncPrintHex((uint64_t)&text);
-	ncNewline();
-	ncPrint("  rodata: 0x");
-	ncPrintHex((uint64_t)&rodata);
-	ncNewline();
-	ncPrint("  data: 0x");
-	ncPrintHex((uint64_t)&data);
-	ncNewline();
-	ncPrint("  bss: 0x");
-	ncPrintHex((uint64_t)&bss);
-	ncNewline();
-	ncPrint("[Done]");
-	ncNewline();
-	ncNewline();
-
-	//initial_info();
-	ncPrint("Loading IDT");
-	ncNewline();
-	ncNewline();
-	ncPrint("Done IDT");
-	draw_string("Hola");
+	
 	initializeMemory();
 	init_processes();
 	init_sched();
 	init_graphics();
+	draw_string("HELLO");
 	
 
 	return getStackBase();
@@ -95,7 +74,7 @@ int main()
 	load_idt();
 	to_userland();
 	while(1){
-		
+
 	}	
 	
 	return 0;
