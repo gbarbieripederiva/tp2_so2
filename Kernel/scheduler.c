@@ -5,6 +5,7 @@
 #include <interrupts.h>
 #include <memoryManager.h>
 #include <naiveConsole.h>
+#include <graphics.h>
 
 
 
@@ -110,6 +111,8 @@ int kill_process(int pid){
 }
 
 uint64_t scheduler(uint64_t sp){
+    draw_string("sched");
+    
     procsInSched[iterator].process -> sp = sp;
     next();
     return(procsInSched[iterator].process -> sp);
