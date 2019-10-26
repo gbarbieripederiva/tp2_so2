@@ -107,12 +107,16 @@ pic_slave_mask:
     retn
 
 
-
+EXTERN scheduler
 _irq00_handler:					;8254 Timer (Timer Tick)
 	push_all
 
 	mov rdi, 0				; pasaje de parametro
 	call irq_dispatcher
+
+	mov rdi, rsp
+	call scheduler
+	mov rsp, rax
 
 	
 	pop_all							; signal pic EOI (End of Interrupt)
@@ -144,13 +148,3 @@ GLOBAL haltFunction
 haltFunction:
 	hlt
 	ret
-
-GLOBAL _context_switch
-EXTERN scheduler
-_context_switch:
-	push_all
-	mov rdi, rsp
-	call scheduler
-	mov rsp, rax
-	pop_all
-	iretq
