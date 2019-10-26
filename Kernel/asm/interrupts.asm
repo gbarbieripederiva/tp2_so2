@@ -148,3 +148,13 @@ GLOBAL haltFunction
 haltFunction:
 	hlt
 	ret
+
+GLOBAL _context_switch
+EXTERN scheduler
+_context_switch:
+	push_all
+	mov rdi, rsp
+	call scheduler
+	mov rsp, rax
+	pop_all
+	iretq

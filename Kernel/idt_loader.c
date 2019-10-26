@@ -17,6 +17,7 @@ void load_idt() {
  	//drivers
 	setup_IDT_entry (0x20, (uint64_t)&_irq00_handler); //timer tick
 	setup_IDT_entry(0x21, (uint64_t)&_irq01_handler); //teclado
+	setup_IDT_entry(0x70,(uint64_t)&_context_switch); //context switch
 	setup_IDT_entry(0x80, (uint64_t)&_syscall_handler); //syscalls
 
 

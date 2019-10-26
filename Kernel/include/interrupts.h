@@ -5,6 +5,7 @@
 
 void _irq00_handler(void);
 void _irq01_handler(void);
+void _context_switch(void);
 /*void _irq02Handler(void);
 void _irq03Handler(void);
 void _irq04Handler(void);

@@ -62,7 +62,6 @@ void * initializeKernelBinary(){
 	init_processes();
 	init_sched();
 	init_graphics();
-	draw_string("HELLO");
 	
 
 	return getStackBase();
