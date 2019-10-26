@@ -79,7 +79,7 @@ void * initializeKernelBinary(){
 	ncNewline();
 	ncNewline();
 	ncPrint("Done IDT");
-
+	draw_string("Hola");
 	initializeMemory();
 	init_processes();
 	init_sched();
@@ -92,7 +92,6 @@ void * initializeKernelBinary(){
 
 int main()
 {
-	draw_char('e');
 	load_idt();
 	to_userland();
 	return 0;
