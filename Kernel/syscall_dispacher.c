@@ -50,6 +50,29 @@ uint64_t syscall_dispacher(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rc
       case NEW_LINE:
         new_line();
         break;
+      case 45:
+		      return (uint64_t) sys_mem_get((long)rsi);
+          break;
+        //sys_mem_free: frees memory
+      case 46:
+          return (int) sys_mem_free((uint64_t) rsi);
+          break;
+        //sys_create_process: Creates and registers new process
+      case 47:
+          return (uint64_t) sys_create_process((char *)rsi, (int) rdx, (uint64_t)rcx); 
+          break;
+        //sys_run_process: Puts process into scheduler with state READY, BLOCKED, HALT
+      case 48:
+          return (int) sys_run_process((processInfo) rsi, (int) rdx);
+          break;
+        //sys_kill_process: stops iterating process from scheduler
+      case 49:
+          return (int) sys_kill_process((int) rsi);
+          break;
+      case 50:
+          sys_print_processes();
+          break;
+
   }
 	return 0;
 }
@@ -78,4 +101,32 @@ void write(int fd, char * pointer, int size) {
     draw_n_chars_color(pointer,size,ERR_FG_COLOR, OUT_BG_COLOR);
   else
     return;
+}
+
+//SYSCALL 45 get memory
+//TODO
+uint64_t sys_mem_get(long size){
+	return (uint64_t) giveMeMemory(size);
+}
+
+//SYSCALL 46 free memory
+int sys_mem_free(uint64_t chunk){
+	return (int)unGiveMeMemory((void *)chunk);
+}
+//SYSCALL 47 creates a new process
+uint64_t sys_create_process(char * name, int priority, uint64_t process){
+	return (uint64_t) create_process(name, priority, process);
+}
+//SYSCALL 48 runs a process
+int sys_run_process(uint64_t process, int state){
+	return run_process(process, state);
+}
+//SYSCALL 49 kills a running process
+int sys_kill_process(int pid){
+	return kill_process(pid);
+}
+
+//SYSCALL 50 prints all running processes
+void sys_print_processes(){
+	print_running_procs();
 }

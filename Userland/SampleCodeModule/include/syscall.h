@@ -1,6 +1,9 @@
 #ifndef _SYSCALL_H
 #define _SYSCALL_H
 
+#define BLOCKED 0
+#define READY 1
+
 #include <stdint.h>
 #include <call_int_80.h>
 
@@ -35,5 +38,22 @@ void sys_beep(void);
 void sys_sleep(int ticks);
 void sys_new_line(void);
 int sys_time(int selector);
+//SYS_CALL 45, for memory management
+void * sys_get_memory(long size);
+
+//SYS_CALL 46, for memory free
+int *sys_mem_free(void * chunk);
+
+//SYS_CALL 47, to create a process
+uint64_t sys_create_process(char * name, int priority, uint64_t process);
+
+//SYS CALL 48, to put a process into the scheduler
+int sys_run_process(uint64_t process, int state);
+
+//SYS CALL 49, to kill a running process
+int sys_kill_process(int pid);
+
+//SYS CALL 50, to print processes
+void sys_print_processes();
 
 #endif

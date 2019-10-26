@@ -7,6 +7,9 @@
 #include <rtc.h>
 #include <sound.h>
 #include <time.h>
+#include <process.h>
+#include <memoryManager.h>
+#include <scheduler.h>
 
 
 #define READ 3

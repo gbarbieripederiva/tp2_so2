@@ -6,6 +6,9 @@
 #include <graphics.h>
 #include <time.h>
 #include <idt_loader.h>
+#include <scheduler.h>
+#include <process.h>
+#include <memoryManager.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -77,12 +80,13 @@ void * initializeKernelBinary(){
 	ncNewline();
 	ncPrint("Done IDT");
 
+	initializeMemory();
+	init_processes();
+	init_sched();
 	init_graphics();
 	load_idt();
 	to_userland();
-	//video_tests();
-	//clear_screen();
-	//init_game();
+
 	return getStackBase();
 }
 

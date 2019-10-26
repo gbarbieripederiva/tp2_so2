@@ -109,7 +109,22 @@ pic_slave_mask:
 
 
 _irq00_handler:					;8254 Timer (Timer Tick)
-	irq_handler_master 0
+	push_all
+
+	mov rdi, 0				; pasaje de parametro
+	call irq_dispatcher
+
+	mov rdi, rsp
+	call scheduler
+	mov rsp, rax
+	
+	
+	pop_all							; signal pic EOI (End of Interrupt)
+	mov al, 20h
+	out 20h, al
+
+	
+	iretq
 
 _irq01_handler:					;Teclado
 	irq_handler_master 1
@@ -127,3 +142,9 @@ _exception13_handler:
 _syscall_handler:
 	call syscall_dispacher
 	iretq
+
+;Halt the program until we get an interrupt:
+GLOBAL haltFunction
+haltFunction:
+	hlt
+	ret

@@ -50,3 +50,32 @@ void sys_sleep(int ticks){
 void sys_beep(){
   _call_int_80(BEEP,0,0,0,0,0);
 }
+
+//SYS_CALL 45, for memory management
+void * sys_get_memory(long size){
+	_call_int_80((uint64_t)45, size,0,0,0,0);
+}
+
+//SYS_CALL 46, for memory free
+int *sys_mem_free(void * chunk){
+	_call_int_80((uint64_t)46, chunk,0,0,0,0);
+}
+
+//SYS_CALL 47, to create a process
+uint64_t sys_create_process(char * name, int priority, uint64_t process){
+	_call_int_80((uint64_t)47, name,priority,process,0,0);
+}
+//SYS CALL 48, to put a process into the scheduler
+int sys_run_process(uint64_t process, int state){
+	_call_int_80((uint64_t)48, process, state,0,0,0);
+}
+
+//SYS CALL 49, to kill a running process
+int sys_kill_process(int pid){
+	_call_int_80((uint64_t)49, pid,0,0,0,0);
+}
+
+//SYS CALL 50, to print processes
+void sys_print_processes(){
+	_call_int_80((uint64_t)50, 0,0,0,0,0);
+}
