@@ -63,7 +63,7 @@ uint64_t syscall_dispacher(uint64_t rdi, uint64_t rsi, uint64_t rdx, uint64_t rc
           break;
         //sys_run_process: Puts process into scheduler with state READY, BLOCKED, HALT
       case 48:
-          return (int) sys_run_process((processInfo) rsi, (int) rdx);
+          return (int) sys_run_process((uint64_t) rsi, (int) rdx);
           break;
         //sys_kill_process: stops iterating process from scheduler
       case 49:
@@ -119,7 +119,7 @@ uint64_t sys_create_process(char * name, int priority, uint64_t process){
 }
 //SYSCALL 48 runs a process
 int sys_run_process(uint64_t process, int state){
-	return run_process(process, state);
+	return run_process((processInfo)process, state);
 }
 //SYSCALL 49 kills a running process
 int sys_kill_process(int pid){

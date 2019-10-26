@@ -39,7 +39,7 @@ void sys_sleep(int ticks);
 void sys_new_line(void);
 int sys_time(int selector);
 //SYS_CALL 45, for memory management
-void * sys_get_memory(long size);
+uint64_t sys_get_memory(long size);
 
 //SYS_CALL 46, for memory free
 int *sys_mem_free(void * chunk);

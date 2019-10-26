@@ -33,5 +33,11 @@
 int read(int param1, char * param2, int param3);
 void write(int param1, char * param2, int param3);
 void color_write(char * pointer, int size, int foreground_color, int background_color);
+uint64_t sys_mem_get(long size);                          //SYS_CALL 45
+int sys_mem_free(uint64_t chunk);                           //SYS_CALL 46
+uint64_t sys_create_process(char * name, int priority, uint64_t process); //SYSCALL 47
+int sys_run_process(uint64_t process, int state); //SYSCALL 48
+int sys_kill_process(int pid); //SYSCAL 49
+void sys_print_processes(); //SYSCALL 50
 
 #endif

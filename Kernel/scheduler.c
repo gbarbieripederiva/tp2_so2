@@ -134,16 +134,16 @@ void print_running_procs(){
     while(i < SIZE && procsInSched[i].state != EMPTY){
         ncPrint("PID:");
         ncPrintDec((uint64_t)procsInSched[i].process ->pid);
-        ncNewLine();
+        ncNewline();
         ncPrint("Name:");
         ncPrint((char *)procsInSched[i].process -> name);
-        ncNewLine();
+        ncNewline();
         ncPrint("State: ");
         ncPrintDec((uint64_t)procsInSched[i].state);
-        ncNewLine();
+        ncNewline();
         ncPrint("Priority: ");
         ncPrintDec((uint64_t)procsInSched[i].process->priority);
-        ncNewLine();
+        ncNewline();
     }
 }
 

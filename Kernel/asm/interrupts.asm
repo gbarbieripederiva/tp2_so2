@@ -107,7 +107,7 @@ pic_slave_mask:
     retn
 
 
-
+EXTERN scheduler
 _irq00_handler:					;8254 Timer (Timer Tick)
 	push_all
 
